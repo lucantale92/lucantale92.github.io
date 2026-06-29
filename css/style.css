@@ -2429,20 +2429,3 @@ body.design-logo-page .srv-section.portfolio-rimando-section {
     gap: 18px !important;
   }
 }
-
-/* Mobile/tablet: immagini Design sempre intere, senza ritagli */
-@media (max-width: 968px) {
-  body.design-page .design-gallery-item img,
-  body.design-page .design-gallery--logo .design-gallery-item img,
-  body.design-page .design-gallery--brand .design-gallery-item img,
-  body.design-page .design-gallery--editoriale .design-gallery-item img,
-  body.design-page .design-gallery--pubblicitaria .design-gallery-item img,
-  body.design-page .design-gallery--gadget .design-gallery-item img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    object-position: center center !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-}
