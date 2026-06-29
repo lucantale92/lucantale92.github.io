@@ -217,16 +217,32 @@ window.addEventListener("scroll", () => { $("nav").classList.toggle("scrolled", 
 
 // ===== MOBILE MENU =====
 function toggleMobile() {
-  $("mobileMenu").classList.toggle("active");
-  $("hamburger").classList.toggle("active");
-  const isOpen = $("mobileMenu").classList.contains("active");
-  $("hamburger").setAttribute("aria-expanded", isOpen ? "true" : "false");
+  const menu = $("mobileMenu");
+  const ham = $("hamburger");
+  const nav = $("nav");
+  if (!menu || !ham) return;
+  menu.classList.toggle("active");
+  ham.classList.toggle("active");
+  const isOpen = menu.classList.contains("active");
+  ham.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  ham.setAttribute("aria-label", isOpen ? "Chiudi menu" : "Apri menu");
+  menu.setAttribute("aria-hidden", isOpen ? "false" : "true");
+  if (nav) nav.classList.toggle("menu-open", isOpen);
+  document.body.classList.toggle("menu-open", isOpen);
   document.body.style.overflow = isOpen ? "hidden" : "";
 }
 function closeMobile() {
-  $("mobileMenu").classList.remove("active");
-  $("hamburger").classList.remove("active");
-  $("hamburger").setAttribute("aria-expanded", "false");
+  const menu = $("mobileMenu");
+  const ham = $("hamburger");
+  const nav = $("nav");
+  if (!menu || !ham) return;
+  menu.classList.remove("active");
+  ham.classList.remove("active");
+  ham.setAttribute("aria-expanded", "false");
+  ham.setAttribute("aria-label", "Apri menu");
+  menu.setAttribute("aria-hidden", "true");
+  if (nav) nav.classList.remove("menu-open");
+  document.body.classList.remove("menu-open");
   document.body.style.overflow = "";
 }
 
