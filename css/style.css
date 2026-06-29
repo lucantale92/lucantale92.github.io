@@ -2244,3 +2244,205 @@ body.design-logo-page .srv-section.portfolio-rimando-section {
     justify-content: center;
   }
 }
+
+
+/* ===== Tablet + mobile refinement finale ===== */
+@media (max-width: 1024px) {
+  /* Menu tablet/mobile: hamburger + X di chiusura */
+  .nav { padding: 16px 22px; }
+  .nav-links { display: none !important; }
+  .nav-right > .lang-switch,
+  .nav-right > .nav-cta { display: none !important; }
+  .hamburger { display: flex !important; }
+  .mobile-menu-tools { display: flex !important; }
+  .nav.menu-open {
+    z-index: 240;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+  }
+  .nav.menu-open .nav-name {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .nav.menu-open .hamburger {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 260;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(250,248,245,.88);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  .nav.menu-open .hamburger span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    margin-left: -11px;
+    margin-top: -1px;
+  }
+  .nav.menu-open .hamburger.active span:nth-child(1) { transform: rotate(45deg); }
+  .nav.menu-open .hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav.menu-open .hamburger.active span:nth-child(3) { transform: rotate(-45deg); }
+
+  /* Home: numeri più ordinati e immagine non tagliata anche su tablet */
+  .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+  .stat-box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 136px;
+    padding: 24px 12px;
+  }
+  .stat-label {
+    text-align: center;
+    line-height: 1.3;
+  }
+  .about-photo {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    overflow: visible;
+    background: transparent;
+  }
+  .about-photo img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    border-radius: var(--radius);
+  }
+
+  /* Recensioni Fiverr: card non tagliate e frecce rotonde */
+  #reviews {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    overflow: hidden;
+  }
+  #fiverr-track {
+    width: 100%;
+    max-width: 100%;
+  }
+  #fiverr-track > div {
+    box-sizing: border-box !important;
+  }
+  #fiverr-prev,
+  #fiverr-next {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    flex: 0 0 42px !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+  #fiverr-dots {
+    max-width: calc(100vw - 160px);
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  /* Pagine Design: spazi omogenei tra sezioni e gallerie coerenti */
+  body.design-page .srv-section,
+  body.design-page .srv-section-alt {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+  body.design-page .srv-section.no-margin-top {
+    margin-top: 0 !important;
+  }
+  body.design-page .srv-section-alt {
+    padding-bottom: 52px !important;
+  }
+  body.design-page .srv-section.portfolio-rimando-section {
+    margin-top: 0 !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  body.design-page .design-gallery,
+  body.design-page .design-gallery--logo,
+  body.design-page .design-gallery--brand,
+  body.design-page .design-gallery--editoriale,
+  body.design-page .design-gallery--pubblicitaria,
+  body.design-page .design-gallery--gadget {
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    margin-bottom: 0 !important;
+  }
+  body.design-page .design-gallery-item,
+  body.design-page .design-gallery--logo .design-gallery-item,
+  body.design-page .design-gallery--brand .design-gallery-item,
+  body.design-page .design-gallery--editoriale .design-gallery-item,
+  body.design-page .design-gallery--pubblicitaria .design-gallery-item,
+  body.design-page .design-gallery--gadget .design-gallery-item {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  body.design-page .design-gallery-item:nth-child(1),
+  body.design-page .design-gallery-item:nth-child(4) {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  body.design-page .design-gallery-caption {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body.design-page .srv-section,
+  body.design-page .srv-section-alt {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+  body.design-page .srv-section-alt {
+    padding-bottom: 44px !important;
+  }
+  body.design-page .srv-section.portfolio-rimando-section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  body.design-page .design-gallery,
+  body.design-page .design-gallery--logo,
+  body.design-page .design-gallery--brand,
+  body.design-page .design-gallery--editoriale,
+  body.design-page .design-gallery--pubblicitaria,
+  body.design-page .design-gallery--gadget {
+    gap: 18px !important;
+  }
+}
+
+/* Mobile/tablet: immagini Design sempre intere, senza ritagli */
+@media (max-width: 968px) {
+  body.design-page .design-gallery-item img,
+  body.design-page .design-gallery--logo .design-gallery-item img,
+  body.design-page .design-gallery--brand .design-gallery-item img,
+  body.design-page .design-gallery--editoriale .design-gallery-item img,
+  body.design-page .design-gallery--pubblicitaria .design-gallery-item img,
+  body.design-page .design-gallery--gadget .design-gallery-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
