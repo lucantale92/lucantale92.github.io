@@ -614,7 +614,7 @@
 
     let fiverrIndex = 0;
     function getFiverrCardsVisible() {
-      return window.innerWidth < 700 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+      return window.innerWidth < 700 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
     }
 
     function fiverrStars(n) {
