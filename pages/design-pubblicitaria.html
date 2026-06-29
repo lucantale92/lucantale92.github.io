@@ -242,7 +242,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
-    const PDF_URL = "https://lucantale92.github.io/portfolio-pdf/Portfolio%20ENG%20HQ.pdf";
+    const PDF_URL = new URL("/portfolio-pdf/Portfolio%20ENG%20HQ.pdf", window.location.origin).href;
     let pdfDoc = null;
     let pdfLoadPromise = null;
     let pdfLoadError = false;
