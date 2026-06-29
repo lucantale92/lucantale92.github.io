@@ -613,7 +613,9 @@
     ];
 
     let fiverrIndex = 0;
-    const CARDS_VISIBLE = window.innerWidth < 700 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+    function getFiverrCardsVisible() {
+      return window.innerWidth < 700 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+    }
 
     function fiverrStars(n) {
       return Array.from({length: 5}, (_, i) => `<span style="color:${i < n ? '#f5a623' : '#ddd'}">★</span>`).join('');
@@ -625,9 +627,17 @@
 
     function buildFiverr() {
       const track = document.getElementById('fiverr-track');
-      const cardW = Math.floor((document.getElementById('reviews').offsetWidth - 96 - (CARDS_VISIBLE - 1) * 24) / CARDS_VISIBLE);
+      if (!track) return;
+      const carousel = track.parentElement;
+      const cardsVisible = getFiverrCardsVisible();
+      const gap = window.innerWidth < 700 ? 0 : 24;
+      track.style.gap = gap + 'px';
+      track.style.transform = 'translateX(0)';
+      fiverrIndex = 0;
+      const availableW = carousel ? carousel.clientWidth : document.getElementById('reviews').clientWidth;
+      const cardW = Math.max(260, Math.floor((availableW - ((cardsVisible - 1) * gap) - 4) / cardsVisible));
       track.innerHTML = FIVERR_REVIEWS.map(r => `
-        <div style="flex:0 0 ${cardW}px;background:#fff;border:1.5px solid #e0dbd4;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
+        <div style="flex:0 0 ${cardW}px;max-width:${cardW}px;background:#fff;border:1.5px solid #e0dbd4;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
             <div style="width:40px;height:40px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:15px;flex-shrink:0;">${fiverrInitials(r.name)}</div>
             <div>
@@ -640,7 +650,7 @@
         </div>
       `).join('');
 
-      const total = Math.ceil(FIVERR_REVIEWS.length / CARDS_VISIBLE);
+      const total = Math.ceil(FIVERR_REVIEWS.length / cardsVisible);
       const dots = document.getElementById('fiverr-dots');
       dots.innerHTML = Array.from({length: total}, (_, i) =>
         `<div onclick="fiverrGoTo(${i})" style="width:${i === 0 ? '20px' : '8px'};height:8px;border-radius:4px;background:${i === 0 ? 'var(--accent)' : 'var(--border)'};cursor:pointer;transition:all .3s;" id="dot-${i}"></div>`
@@ -648,31 +658,41 @@
     }
 
     function fiverrGoTo(i) {
+      const track = document.getElementById('fiverr-track');
       const cards = document.querySelectorAll('#fiverr-track > div');
-      if (!cards.length) return;
-      const cardW = cards[0].offsetWidth + 24;
-      const max = FIVERR_REVIEWS.length - CARDS_VISIBLE;
-      fiverrIndex = Math.min(i * CARDS_VISIBLE, max);
-      document.getElementById('fiverr-track').style.transform = `translateX(-${fiverrIndex * cardW}px)`;
-      const total = Math.ceil(FIVERR_REVIEWS.length / CARDS_VISIBLE);
+      if (!track || !cards.length) return;
+      const cardsVisible = getFiverrCardsVisible();
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const cardW = cards[0].offsetWidth + gap;
+      const max = Math.max(0, FIVERR_REVIEWS.length - cardsVisible);
+      fiverrIndex = Math.min(i * cardsVisible, max);
+      track.style.transform = `translateX(-${fiverrIndex * cardW}px)`;
+      const total = Math.ceil(FIVERR_REVIEWS.length / cardsVisible);
+      const activeDot = Math.round(fiverrIndex / cardsVisible);
       for (let j = 0; j < total; j++) {
         const d = document.getElementById('dot-' + j);
-        if (d) { d.style.width = j === i ? '20px' : '8px'; d.style.background = j === i ? 'var(--accent)' : 'var(--border)'; }
+        if (d) { d.style.width = j === activeDot ? '20px' : '8px'; d.style.background = j === activeDot ? 'var(--accent)' : 'var(--border)'; }
       }
     }
 
     function fiverrNext() {
-      const total = Math.ceil(FIVERR_REVIEWS.length / CARDS_VISIBLE);
-      const cur = Math.round(fiverrIndex / CARDS_VISIBLE);
+      const cardsVisible = getFiverrCardsVisible();
+      const total = Math.ceil(FIVERR_REVIEWS.length / cardsVisible);
+      const cur = Math.round(fiverrIndex / cardsVisible);
       fiverrGoTo(Math.min(cur + 1, total - 1));
     }
 
     function fiverrPrev() {
-      const cur = Math.round(fiverrIndex / CARDS_VISIBLE);
+      const cardsVisible = getFiverrCardsVisible();
+      const cur = Math.round(fiverrIndex / cardsVisible);
       fiverrGoTo(Math.max(cur - 1, 0));
     }
 
     document.addEventListener('DOMContentLoaded', buildFiverr);
+    window.addEventListener('resize', () => {
+      clearTimeout(window.__fiverrResizeTimer);
+      window.__fiverrResizeTimer = setTimeout(buildFiverr, 180);
+    });
   </script>
 
   <!-- CONTACT -->
