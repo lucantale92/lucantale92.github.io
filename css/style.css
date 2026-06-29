@@ -2127,3 +2127,120 @@ body.design-logo-page .srv-section.portfolio-rimando-section {
     aspect-ratio: 16 / 9;
   }
 }
+
+
+/* ===== Mobile refinement finale ===== */
+@media (max-width: 968px) {
+  .nav.menu-open {
+    z-index: 240;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+  }
+  .nav.menu-open .nav-name {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .nav.menu-open .hamburger {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 260;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(250,248,245,.88);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  .nav.menu-open .hamburger span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    margin-left: -11px;
+    margin-top: -1px;
+  }
+  .nav.menu-open .hamburger.active span:nth-child(1) { transform: rotate(45deg); }
+  .nav.menu-open .hamburger.active span:nth-child(2) { opacity: 0; }
+  .nav.menu-open .hamburger.active span:nth-child(3) { transform: rotate(-45deg); }
+
+  body.design-page .srv-section-alt {
+    padding-bottom: 46px !important;
+  }
+  body.design-page .srv-section.portfolio-rimando-section {
+    margin-top: 42px !important;
+  }
+  body.design-logo-page .srv-section.portfolio-rimando-section {
+    margin-top: 30px !important;
+  }
+  body.design-pubblicitaria-page .srv-section.portfolio-rimando-section {
+    margin-top: 38px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .stat-box {
+    min-height: 128px;
+    padding: 22px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .stat-num {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+  }
+  .stat-label {
+    text-align: center;
+    line-height: 1.3;
+    max-width: 100%;
+  }
+  .about-photo {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    overflow: visible;
+    background: transparent;
+  }
+  .about-photo img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    border-radius: var(--radius);
+  }
+  #reviews {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    overflow: hidden;
+  }
+  #fiverr-track {
+    gap: 0 !important;
+  }
+  #fiverr-track > div {
+    box-shadow: 0 4px 18px rgba(0,0,0,.07) !important;
+  }
+  #fiverr-prev,
+  #fiverr-next {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    flex: 0 0 42px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+  #fiverr-dots {
+    max-width: calc(100vw - 150px);
+    overflow: hidden;
+    justify-content: center;
+  }
+}
